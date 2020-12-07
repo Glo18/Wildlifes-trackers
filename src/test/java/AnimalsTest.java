@@ -24,9 +24,16 @@ public class AnimalsTest  {
 
     @Test
     public void equals_returnsTrueIfNameAndIdAreSame_true() {
-        Animals fisrtAnimals = new Animals("Elephant", 1);
+        Animals firstAnimals = new Animals("Elephant", 1);
         Animals anotherAnimals = new Animals("Elephant", 1);
-        assertTrue(fisrtAnimals.equals(anotherAnimals));
+        assertTrue(firstAnimals.equals(anotherAnimals));
+    }
+
+    @Test
+    public void save_AnimalsIntoDatabase_Animals() {
+        Animals testAnimals = new Animals("Elephant", 1);
+        testAnimals.save();
+        assertTrue(Animals.all().get(0).equals(testAnimals));
     }
 
 }
