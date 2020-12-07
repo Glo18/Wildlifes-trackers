@@ -1,8 +1,12 @@
-import org.junit.Test;
+import org.junit.*;
+import org.sql2o.*;
 
 import static org.junit.Assert.*;
 
 public class AnimalsTest  {
+
+    @Rule
+    public DatabaseRule database = new DatabaseRule();
 
     @Test
     public void animals_instantiatesCorrectly_true(){
@@ -24,9 +28,9 @@ public class AnimalsTest  {
 
     @Test
     public void equals_returnsTrueIfNameAndIdAreSame_true() {
-        Animals firstAnimals = new Animals("Elephant", 1);
-        Animals anotherAnimals = new Animals("Elephant", 1);
-        assertTrue(firstAnimals.equals(anotherAnimals));
+        Animals firstAnimal = new Animals("Elephant", 1);
+        Animals anotherAnimal = new Animals("Elephant", 1);
+        assertTrue(firstAnimal.equals(anotherAnimal));
     }
 
     @Test
@@ -34,6 +38,16 @@ public class AnimalsTest  {
         Animals testAnimals = new Animals("Elephant", 1);
         testAnimals.save();
         assertTrue(Animals.all().get(0).equals(testAnimals));
+    }
+
+    @Test
+    public void all_returnsAllInstancesOfAnimals_true() {
+        Animals firstAnimal = new Animals("Elephant", 1);
+        firstAnimal.save();
+        Animals secondAnimal = new Animals("Elephant", 1);
+        secondAnimal.save();
+        assertEquals(true, Animals.all().get(0).equals(firstAnimal));
+        assertEquals(true, Animals.all().get(1).equals(secondAnimal));
     }
 
 }
