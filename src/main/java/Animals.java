@@ -1,7 +1,6 @@
-import java.sql.Connection;
-import java.util.List;
+import org.sql2o.Connection;
 
-import org.sql2o.*;
+import java.util.List;
 
 public class Animals {
     private String name;
@@ -46,6 +45,15 @@ public class Animals {
         try (Connection con = DB.sql2o.open()) {
             return con.createQuery(sql).executeAndFetch(Animals.class);
         }
+    }
 
+    public static Animals find(int id) {
+        try (Connection con = DB.sql2o.open()) {
+            String sql = "SELECT * FROM animals where id=:id";
+            Animals animals = con.createQuery(sql)
+                    .addParameter("id", id);
+                    executeAndFetchFirst(Animals.class);
+            return animals;
         }
-}
+        }
+    }

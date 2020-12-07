@@ -1,4 +1,3 @@
-import com.sun.jdi.connect.spi.Connection;
 import org.junit.rules.ExternalResource;
 import org.sql2o.*;
 
