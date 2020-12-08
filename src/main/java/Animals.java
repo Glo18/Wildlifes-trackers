@@ -1,5 +1,8 @@
 import org.sql2o.Connection;
+import org.sql2o.Query;
 
+
+import java.sql.Connection;
 import java.util.List;
 
 public class Animals {
@@ -16,6 +19,7 @@ public class Animals {
     }
 
     public int getId() {
+
         return id;
     }
 
@@ -54,6 +58,15 @@ public class Animals {
                     .addParameter("id", id);
                     executeAndFetchFirst(Animals.class);
             return animals;
+        }
+        }
+
+        public void delete() {
+        try (Connection con = DB.sql2o.open()){
+            String sql = "DELETE FROM animals WHERE id = :id;";
+            con.createQuery(sql)
+                    .addParameter("id", this.id)
+                    .executeUpdate();
         }
         }
     }

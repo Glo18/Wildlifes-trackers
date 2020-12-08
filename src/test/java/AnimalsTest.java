@@ -1,4 +1,7 @@
-import org.junit.*;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.Rule;
+
 
 import static org.junit.Assert.*;
 
@@ -64,4 +67,5 @@ public class AnimalsTest  {
         secondAnimal.save();
         assertEquals(Animals.find(secondAnimal.getId()), secondAnimal);
     }
+
 }
