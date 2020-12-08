@@ -1,0 +1,21 @@
+{{#partial "title"}}
+    <h4>Add an animal to Jumanji</h4>
+    {{/partial}}
+
+{{#partial "content"}}
+    <body style="background-color: lavenderblush;" background-size:cover;">
+    <form action="/addAnimal" method="post">
+
+        <div class="form-group">
+            <label for="name">Name of the animal:{{animalName}}</label>
+            <input id="animalName" name="animalName" class="form-control" type="text" required>
+        </div>
+
+        <button class="btn btn-success" href="/SuccessAnimal" type="submit"> Submit</button>
+    </form>
+    </body>
+
+    {{/partial}}
+
+
+{{> layout.hbs}}
