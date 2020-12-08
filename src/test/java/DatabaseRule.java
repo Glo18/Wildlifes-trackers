@@ -1,6 +1,8 @@
 import org.junit.rules.ExternalResource;
 import org.sql2o.*;
 
+import java.sql.Connection;
+
 public class DatabaseRule extends ExternalResource {
 
     @Override
@@ -12,7 +14,9 @@ public class DatabaseRule extends ExternalResource {
     protected void after() {
         try(Connection con = DB.sql2o.open()) {
             String deleteAnimalsQuery = "DELETE FROM animals *;";
+            String deleteSightingsQuery = "DELETE FROM sightings *";
             con.createQuery(deleteAnimalsQuery).executeUpdate();
+            con.createQuery(deleteSightingsQuery).executeUpdate();
         }
     }
 

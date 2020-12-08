@@ -1,5 +1,8 @@
 import org.sql2o.Connection;
 import org.sql2o.Query;
+import org.sql2o.Sql2o;
+import org.sql2o.Sql2oException;
+import java.util.Objects;
 
 
 import java.sql.Connection;
@@ -18,9 +21,17 @@ public class Animals {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public int getId() {
 
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
@@ -41,13 +52,16 @@ public class Animals {
                     .addParameter("name", this.name)
                     .executeUpdate()
                     .getKey();
+            setId(id);
         }
     }
 
     public static List<Animals> all() {
-        String sql = "SELECT * FROM persons";
+        String sql = "SELECT * FROM animals where type='animal';";
         try (Connection con = DB.sql2o.open()) {
-            return con.createQuery(sql).executeAndFetch(Animals.class);
+            return con.createQuery(sql)
+                    .throwOnMappingFailure(false)
+                    .executeAndFetch(Animals.class);
         }
     }
 

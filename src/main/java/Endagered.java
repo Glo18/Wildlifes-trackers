@@ -1,4 +1,6 @@
 import java.sql.Connection;
+import java.util.List;
+
 import org.sql2o.Sql2oException;
 
 public class Endagered {
@@ -25,12 +27,24 @@ public class Endagered {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getHealth(){
         return health;
     }
 
+    public void setHealth(String health) {
+        this.health = health;
+    }
+
     public String getAge(){
         return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
     }
 
     public int getId() {
@@ -52,7 +66,7 @@ public class Endagered {
         }
     }
 
-    public static List<Endangered> getAllEndangered(){
+    public static List<Endagered> getAllEndagered(){
         String sql = "SELECT * FROM animals WHERE type = 'endangered';";
 
         try (Connection con = DB.sql2o.open()){
