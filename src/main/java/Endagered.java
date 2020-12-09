@@ -1,7 +1,7 @@
-import java.sql.Connection;
-import java.util.List;
-
+import org.sql2o.Connection;
 import org.sql2o.Sql2oException;
+
+import java.util.List;
 
 public class Endagered {
     private int id;
@@ -72,7 +72,7 @@ public class Endagered {
         try (Connection con = DB.sql2o.open()){
             return   con.createQuery(sql)
                     .throwOnMappingFailure(false)
-                    .executeAndFetch(Endangered.class);
+                    .executeAndFetch(Endagered.class);
 
         }
     }
@@ -96,7 +96,7 @@ public class Endagered {
     public void delete() {
         try(Connection con = DB.sql2o.open()) {
             String sql = "DELETE FROM animals WHERE id = :id;";
-            con.createQuery(sql)
+            ((Connection) con).createQuery(sql)
                     .addParameter("id", this.id)
                     .executeUpdate();
         }catch (Sql2oException ex ){

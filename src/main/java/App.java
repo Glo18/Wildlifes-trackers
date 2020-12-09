@@ -21,9 +21,9 @@ public class App {
         post("/addAnimal", (request, response) -> {
 
             Map<String, Object> model = new HashMap<>();
-            String animalName = request.queryParams("animalName");
+            String name = request.queryParams("animalsName");
 
-            Animals animals = new Animals(animalName);
+            Animals animals = new Animals(name);
             animals.save();
             model.put("animals", animals);
             return new ModelAndView(model, "SuccessAnimal.hbs");

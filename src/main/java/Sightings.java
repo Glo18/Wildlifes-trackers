@@ -1,7 +1,8 @@
-import javax.management.Query;
-import java.sql.Connection;
-import java.util.List;
+import org.sql2o.Connection;
+import org.sql2o.Query;
 import org.sql2o.Sql2oException;
+
+import java.util.List;
 
 public class Sightings {
 
@@ -40,15 +41,15 @@ public class Sightings {
     public static List<Sightings> getAllSightings(){
         String sql = "SELECT * FROM sightings;";
 
-        try (Connection con = DB.sql2o.open()){
-            Query query =con.createQuery(sql);
+        try (org.sql2o.Connection con = DB.sql2o.open()){
+            Query query = ((org.sql2o.Connection) con).createQuery(sql);
             System.out.println(query.executeAndFetch(Sightings.class));
             return query.executeAndFetch(Sightings.class);
         }
     }
 
     public void save() {
-        try (Connection con = DB.sql2o.open()) {
+        try (org.sql2o.Connection con = DB.sql2o.open()) {
             String sql = "INSERT INTO sightings (location, rangerName, aniName) VALUES (:location, :rangerName, :aniName);";
             this.id = (int) con.createQuery(sql,true)
                     .throwOnMappingFailure(false)
