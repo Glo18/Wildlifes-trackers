@@ -96,7 +96,7 @@ public class Endagered {
     public void delete() {
         try(Connection con = DB.sql2o.open()) {
             String sql = "DELETE FROM animals WHERE id = :id;";
-            ((Connection) con).createQuery(sql)
+            con.createQuery(sql)
                     .addParameter("id", this.id)
                     .executeUpdate();
         }catch (Sql2oException ex ){

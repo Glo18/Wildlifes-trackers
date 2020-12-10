@@ -1,21 +1,22 @@
 import org.junit.*;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class EndageredTest {
-    @Rule
-    public DatabaseRule database = new DatabaseRule();
+//    @Rule
+//    public DatabaseRule database = new DatabaseRule();
 
     @Test
-    public void endagered_instantiatesCorrectly_true() {
+    public void Animals_instantiatesName_of_the_animal_true_String() {
         Endagered testEndagered = new Endagered("Rhino", "okay", "Newborn");
-        assertEquals(true, testEndagered instanceof Endagered);
+        assertEquals("Elephant", testEndagered.getName());
     }
 
     @Test
-    public void endagered_instantiatesWithName_String() {
+    public void save_successfully_List() {
         Endagered testEndagered = new Endagered("Rhino","okay", "Newborn");
-        assertEquals("Rhino", testEndagered.getName());
+        testEndagered.save();
+        assertEquals(Endagered.getAllEndagered().get(0), testEndagered);
     }
 
 }
