@@ -7,7 +7,18 @@ import java.util.Map;
 import static spark.Spark.*;
 
 public class App {
-    public static void main(String[] args) {
+        static int getHerokuAssignedPort() {
+            ProcessBuilder processBuilder = new ProcessBuilder();
+            if (processBuilder.environment().get("PORT") != null) {
+                return Integer.parseInt(processBuilder.environment().get("PORT"));
+            }
+            return 4567; //return default port if heroku-port isn't set (i.e. on localhost)
+        }
+        public static void main(String[] args) {
+
+            port(getHerokuAssignedPort());
+            staticFileLocation("/public");
+
         get("/", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
             return new ModelAndView(model, "index.hbs");
@@ -35,9 +46,9 @@ public class App {
             return new ModelAndView(model, "Animals.hbs");
         }, new HandlebarsTemplateEngine());
 
-        get("/EndangeredForm", (request, response) -> {
+        get("/EndageredForm", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
-            return new ModelAndView(model, "EndangeredForm.hbs");
+            return new ModelAndView(model, "EndageredForm.hbs");
         }, new HandlebarsTemplateEngine());
 
 
@@ -50,13 +61,13 @@ public class App {
             Endagered endangered = new Endagered(name, health,age);
             endangered.save();
             model.put("endangered", endangered);
-            return new ModelAndView(model, "SuccessEndangered.hbs");
+            return new ModelAndView(model, "SuccessEndagered.hbs");
         }, new HandlebarsTemplateEngine());
 
-        get("/Endangered", (request, response) -> {
+        get("/Endagered", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
             model.put("Endangered", Endagered.getAllEndagered());
-            return new ModelAndView(model, "Endangered.hbs");
+            return new ModelAndView(model, "Endagered.hbs");
         }, new HandlebarsTemplateEngine());
 
 //        Sightings
