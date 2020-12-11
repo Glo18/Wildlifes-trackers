@@ -70,9 +70,9 @@ public class App {
             Map<String, Object> model = new HashMap<>();
             String location = request.queryParams("location");
             String rangerName = request.queryParams("rangerName");
-            String aniName = request.queryParams("animalName");
+            String animalName = request.queryParams("animalName");
 
-            Sightings sightings = new Sightings(location,rangerName, aniName);
+            Sightings sightings = new Sightings(location,rangerName, animalName);
             sightings.save();
             model.put("sightings", sightings);
             return new ModelAndView(model, "SuccessSightings.hbs");

@@ -6,6 +6,10 @@ plugins {
 group 'org.example.wildlife-tracker'
 version '1.0-SNAPSHOT'
 
+sourceCompatibility = 1.8
+mainClassName = "App"
+
+
 repositories {
     mavenCentral()
 }
