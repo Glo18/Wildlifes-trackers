@@ -4,7 +4,7 @@ import org.sql2o.Sql2oException;
 
 import java.util.List;
 
-public class Sightings {
+public class Sightings implements DatabaseManagement {
 
     private int id;
     private String location;
@@ -41,15 +41,15 @@ public class Sightings {
     public static List<Sightings> getAllSightings(){
         String sql = "SELECT * FROM sightings;";
 
-        try (org.sql2o.Connection con = DB.sql2o.open()){
-            Query query = ((org.sql2o.Connection) con).createQuery(sql);
+        try (Connection con = DB.sql2o.open()){
+            Query query = con.createQuery(sql);
             System.out.println(query.executeAndFetch(Sightings.class));
             return query.executeAndFetch(Sightings.class);
         }
     }
 
     public void save() {
-        try (org.sql2o.Connection con = DB.sql2o.open()) {
+        try (Connection con = DB.sql2o.open()) {
             String sql = "INSERT INTO sightings (location, rangerName, aniName) VALUES (:location, :rangerName, :aniName);";
             this.id = (int) con.createQuery(sql,true)
                     .throwOnMappingFailure(false)

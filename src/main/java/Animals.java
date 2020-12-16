@@ -2,7 +2,7 @@ import org.sql2o.Connection;
 
 import java.util.List;
 
-public class Animals {
+public class Animals implements DatabaseManagement {
     private String name;
     private int id;
 

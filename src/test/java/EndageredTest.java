@@ -14,7 +14,7 @@ public class EndageredTest {
 
     @Test
     public void save_successfully_List() {
-        Endagered testEndagered = new Endagered("Rhino","okay", "Newborn");
+        Endagered testEndagered = new Endagered("Elephant","okay", "Newborn");
         testEndagered.save();
         assertTrue(Endagered.getAllEndagered().get(0).equals(testEndagered));
     }

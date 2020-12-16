@@ -3,7 +3,7 @@ import org.sql2o.Sql2oException;
 
 import java.util.List;
 
-public class Endagered {
+public class Endagered implements DatabaseManagement {
     private int id;
     private String name;
     private String health;

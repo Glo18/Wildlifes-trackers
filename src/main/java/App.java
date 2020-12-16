@@ -58,7 +58,7 @@ public class App {
             String name = request.queryParams("name");
             String health = request.queryParams("health");
             String age = request.queryParams("age");
-            Endagered endangered = new Endagered(name, health,age);
+            Endagered endangered = new Endagered(name, health, age);
             endangered.save();
             model.put("endangered", endangered);
             return new ModelAndView(model, "SuccessEndagered.hbs");
