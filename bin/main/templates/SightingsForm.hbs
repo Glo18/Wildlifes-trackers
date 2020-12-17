@@ -1,0 +1,34 @@
+{{#partial "title"}}
+    <h1>Sightings</h1>
+{{/partial}}
+
+
+
+{{#partial "content"}}
+    <body style="background-color: peru;" background-size:cover;">
+    <form action="/spotted"   method="post" style="color:white;">
+        <div class="form-group">
+            <label for="animalName">Name of the Animal:{{animalName}}</label>
+            <input id="animalName" name="animalName" class="form-control" type="text" required>
+        </div>
+        <div class="form-group">
+            <label for="Location">Location: {{location}}</label>
+            <select id="location" name="location" type="text" class="form-control">
+                <option value="zoneA">Zone A</option>
+                <option value="zoneB">Zone B</option>
+                <option value="zoneC">Zone C</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="rangerName">Name of the Ranger:{{rangerName}}</label>
+            <input id="rangerName" name="rangerName" class="form-control" type="text" required>
+        </div>
+
+
+        <button class="btn btn-success" href="/successSightings" type="submit"> Submit</button>
+
+    </form>
+    </body>
+{{/partial}}
+
+{{> layout.hbs}}

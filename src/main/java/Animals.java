@@ -5,14 +5,17 @@ import java.util.List;
 public class Animals implements DatabaseManagement {
     private String name;
     private int id;
+    public String type;
+    private final String DATABASE_TYPE = "animal";
 
-    public Animals(String name, int id) {
-        this.name = name;
-        this.id = id;
-    }
 
     public Animals(String name) {
+        this.name = name;
+        this.setType(DATABASE_TYPE);
     }
+
+//    public Animals(String name) {
+//    }
 
     public String getName() {
         return name;
@@ -30,6 +33,12 @@ public class Animals implements DatabaseManagement {
     public void setId(int id) {
         this.id = id;
     }
+    public void setType(String type) {
+        this.type = type;
+    }
+    public static Object all() {
+        return all();
+    }
 
     @Override
     public boolean equals(Object otherAnimals){
@@ -44,9 +53,10 @@ public class Animals implements DatabaseManagement {
 
     public void save() {
         try (Connection con = DB.sql2o.open()) {
-            String sql = "INSERT INTO animals (name) VALUES (:name)";
+            String sql = "INSERT INTO animals (name, type) VALUES (:name, :type)";
             this.id = (int) con.createQuery(sql, true)
                     .addParameter("name", this.name)
+                    .addParameter("type", this.type)
                     .executeUpdate()
                     .getKey();
             setId(id);
